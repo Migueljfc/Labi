@@ -1,0 +1,22 @@
+#BASE de DADOS: database1.db
+#Ex 18.1######
+CREATE TABLE contacts(firstname TEXT, middlename TEXT, lastname TEXT, email TEXT, phone TEXT);
+INSERT INTO contacts VALUES("Joao", "Manuel","Fonseca","jmf@gmail.com","912345678");
+#Ex 18.2######
+INSERT INTO contacts VAlUES("Pedro","Albuquerque","Silva","pedro23@gmail.com","961245678");
+INSERT INTO contacts VAlUES("Maria","Carreira","Dinis","mariadia@ua.pt","961587438");
+INSERT INTO contacts VAlUES("Catarina","Alexandra","Joaquina","cAjoaquina@sapo.pt","912365896");
+
+#Ex 18.6
+CREATE TABLE companies(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, adress TEXT, vatnumber INTEGER);
+INSERT INTO companies (name, adress, vatnumber) VALUES("MaxiPlano","Aveiro",123123123123);
+INSERT INTO companies (name, adress,vatnumber) VALUES("Luis Manuel & filhos","Agueda",54534343435);
+INSERT INTO companies (name, adress,vatnumber) VALUES("ProDesign","Porto",54534343435);
+
+CREATE TABLE contacts(firstname TEXT, middlename TEXT, lastname TEXT, email TEXT, phone TEXT,company_id INTEGER PRIMARY KEY AUTOINCREMENT);
+INSERT INTO contacts (firstname,middlename,lastname,email,phone) VALUES("Joao", "Manuel","Fonseca","jmf@gmail.com","912345678");
+INSERT INTO contacts (firstname,middlename,lastname,email,phone)VAlUES("Pedro","Albuquerque","Silva","pedro23@gmail.com","961245678");
+INSERT INTO contacts (firstname,middlename,lastname,email,phone)VAlUES("Maria","Carreira","Dinis","mariadia@ua.pt","961587438");
+INSERT INTO contacts(firstname,middlename,lastname,email,phone) VAlUES("Catarina","Alexandra","Joaquina","cAjoaquina@sapo.pt","912365896");
+
+
