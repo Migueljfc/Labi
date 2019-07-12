@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>Plataformas Usadas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="pag.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--------->
+  <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+   <script type="text/javascript" src="grafico-linhas.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  body {font-family: 'Courier New'}
+  </style>
+
+
+  <body onload="desenhaGrafico();desenhaGrafico2();" style="font-size: 17px;">
+    <div id="adeus">
+      <div id="adeus-overlay">
+
+      </div>
+
+    </div>
+
+
+
+    <div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"><i class="fa fa-bars"></i></a>
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Plataformas de teste</a>
+
+    <a href="about/about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Sobre nós</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">Algoritmos de teste <i class="fa fa-caret-down"></i></button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="dry.html" class="w3-bar-item w3-button">Dhrystone</a>
+        <a href="whet.html" class="w3-bar-item w3-button">Whetstone</a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+    <section>
+      <h1 style="text-align: center;">Sistemas Usados</h1>
+    </section>
+    <section style="margin-left: 20px;">
+     <a href = "http://prodotti-usati.it/s/hp-omen-17"> <img src="pc.jpg" style="float: right; margin-right: 60px;"></a>
+      <h2> Sistema 1:</h2>
+      <p><b>Processador:</b> Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz 2.81 GHz.</p>
+      <p><b>RAM:</b> 16 GB.</p>
+      <p><b>Sistemas Operatívos:</b> Dual boot (Windows 10 e Ubunto 16.04).</p>
+    </section>
+    <br>
+    <br>
+
+    <section style="margin-left: 20px;">
+      <a href = "https://www.fnac.es/Portatil-Lenovo-Ideapad-300-15ISK-15-6-plata-Ordenador-portatil-PC-Portatil/a1190004"><img src="pc2.jpg" style="float: right; width: 290px;"></a>
+      
+      <h2>Sistema 2:</h2>
+      <p><b>Processador:</b>Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz</p>
+      <p><b>RAM:</b> 16 GB.</p>
+      <p><b>Sistemas Operatívos:</b> Dual boot (Windows 10 e Ubunto 18.04).</p>
+      
+     </section>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <section style="background-color: skyblue;">
+       <h1 style="text-align: center;">Resultados obtidos por Sistema</h1>
+       <div class="row" style="margin-left:15%">
+         <div class="col-sm-6">
+           <div id="grafico-linhas" align="center" style="width: 400px; height: 300px; margin-left: 40px; "></div>
+
+         </div>
+         <div class="col-sm-6">
+           <div id="grafico-linhas2" align="center" style="width: 400px; height: 300px; margin-right: 40px;"></div>
+
+         </div>
+       </div>
+       <br>
+       <br>
+     </section>
+
+       <!------>
+      <section>
+       <h1 style="text-align: center;">Comparador de Sistemas</h1>
+       <br>
+      
+       <div class="row" style="margin-left:15%">
+         <div class="col-sm-6">
+           <div id="grafico-linhas3" align="center" style="width: 400px; height: 300px; margin-left: 40px; "></div>
+
+         </div>
+         <div class="col-sm-6">
+           <div id="grafico-linhas4" align="center" style="width: 400px; height: 300px; margin-right: 40px;"></div>
+
+         </div>
+       </div>
+       <div style="text-align: center;">
+         <button class="btn btn-success" onclick="desenhaGrafico3()"  > Insira os seus Dhrystone </button>
+       </div>
+
+     </section>
+
+     <section style="text-align: center; color: white; background-color: green;">
+       <h1><b>Conclusões</b></h1>
+       <br>
+       <p style="padding: 20px; font-size:20px;">A partir dos testes feitos é possível concluir que não só os
+          CPUs mais atuais têm uma melhor performance mas também podemos observar
+          que o Windows é o que tira pior proveito do CPU.
+          Deparamo-nos também com uma supresa, o facto de uma máquina virtual
+          com o Sistema operativo Ubunto conseguir ter uma melhor performance no que
+          toca a operações com números do tipo "float"em relação ao Ubunto nativo isto
+          poderá ser devido ao facto da versão do Ubunto do sistema 1 ser inferior ao da
+          máquina virtual.
+          É obvio que os CPUs não são tudo para um computador, existem obvia-
+          mente componentes tão importantes como o CPU que afetam a performance do
+          computador nas mais variadas tarefas.
+          Assim sendo para quem queira um melhor poder de processamento no seu
+          computador poderá assim fazer com estes testes uma escolha mais adequada.</p>
+      
+       
+
+     </section>
+     
+
+     
+
+
+
+
+
+
+    <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+
+      <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </footer>
+
+
+
+  </body>
+</html>

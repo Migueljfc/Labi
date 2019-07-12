@@ -1,0 +1,482 @@
+\documentclass{report}
+\usepackage[T1]{fontenc} % Fontes T1
+\usepackage[utf8]{inputenc} % Input UTF8
+\usepackage[backend=biber, style=ieee]{biblatex} % para usar bibliografia
+\usepackage{csquotes}
+\usepackage[portuguese]{babel} %Usar língua portuguesa
+\usepackage{blindtext} % Gerar texto automaticamente
+\usepackage[printonlyused]{acronym}
+\usepackage{hyperref} % para autoref
+\usepackage{xcolor}
+\usepackage{comment}
+\usepackage{bchart}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\newcommand{\lin}[1]{\centerline{\fbox{\texttt{#1}}}}
+
+
+
+\bibliography{bibliografia}
+
+\begin{document}
+%%
+% Definições
+%
+\def\titulo{Benchmarking de diferentes CPUs em diferentes sistemas operativos}
+\def\data{Novembro 2018}
+\def\autores{Guilherme Pereira, Miguel Cabral}
+\def\autorescontactos{(93134) guilherme.pereira@ua.pt, (93091) miguel.f.cabral@ua.pt}
+\def\versao{VERSAO}
+\def\departamento{DEPARTAMENTO DE ELETRÓNICA, TELECOMUNICAÇÕES E INFORMÁRICA}
+\def\empresa{Engenharia de Computadores e Telemática}
+\def\logotipo{ua.pdf}
+%
+%%%%%% CAPA %%%%%%
+%
+\begin{titlepage}
+
+\begin{center}
+%
+\vspace*{50mm}
+%
+{\Huge \titulo}\\ 
+%
+\vspace{10mm}
+%
+{\Large \empresa}\\
+%
+\vspace{10mm}
+%
+{\LARGE \autores}\\ 
+%
+\vspace{30mm}
+%
+\begin{figure}[h]
+\center
+\includegraphics{\logotipo}
+\end{figure}
+%
+\vspace{30mm}
+\end{center}
+%
+\begin{flushright}
+\versao
+\end{flushright}
+\end{titlepage}
+
+%%  Página de Título %%
+\title{%
+{\Huge\textbf{\titulo}}\\
+{\Large \departamento\\ \empresa}
+}
+%
+\author{%
+    \autores \\
+    \autorescontactos
+}
+%
+\date{\data}
+%
+\maketitle
+
+\pagenumbering{roman}
+
+%%%%%% RESUMO %%%%%%
+\begin{abstract}
+Este relatório foi construído para o projeto de aprofundameto da cadeira Laboratórios de informática, mas também pela grande curiosidade em saber se haveria algum Sistema operativo que tirasse melhor proveito dos CPUs e em caso afirmativo qual seria o motivo para isso acontecer.
+
+Como plataformas de teste usamos os computadores dos membros do grupo os quais contêm os Sistemas operativos Windows 10 e Ubunto(16.04 e 18.04) assim como uma máquina virtual contendo(Ubunto 18.04).
+
+Para executar os testes que nos permitiriam tirar as conclusões necessárias foram usados dois algoritmos em C que avaliam a capacidade de processação do processador, que são o Dhrystone e o Whetstone.
+Assim como era esperado obtivemos resultados que indiciam um melhor desempenho do CPU no Sistema Operativo Ubunto.
+
+Com as nossas conclusões pretendemos ajudar quem necessite de um elevado uso do seu CPU, a escolher um melhor Sistema operativo baseado nos resultados obtidos pelos testes realizados.
+\end{abstract}
+
+%%%%%% Agradecimentos %%%%%%
+% Segundo glisc deveria aparecer após conclusão...
+\begin{comment}
+\renewcommand{\abstractname}{Agradecimentos}
+\begin{abstract}
+Eventuais agradecimentos.
+Comentar bloco caso não existam agradecimentos a fazer.
+\end{abstract}
+\end{comment}
+
+
+\tableofcontents
+% \listoftables     % descomentar se necessário
+% \listoffigures    % descomentar se necessário
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introdução}
+\label{chap.introducao}
+Há já muitos tempo que existem vários sistemas operativos com arquiteturas e interfaces diferentes, sejam eles Windows ou Linux cada um tem as suas vantagens e as suas desvantagens.Com a evolução das arquiteturas de computadores, ficou cada vez mais difícil comparar a performance de diferentes sistemas de computação somente olhando para as suas especificações. Por isso, foram feitos testes em diferentes sistemas, permitindo que com esses resultados possam ser comparadas as diferentes arquiteturas.Uma das principais diferenças é a capacidade de processamento na mesma máquina mas em sistemas operativos diferentes, CPUs podem fornecer
+desempenhos surpreendentes usando multiplos de núcleos disponíveis. Este relatório foca-se precisamente nesta comparação usando dois algoritmos benchmarking o Drystone e o Whetstone.
+Benchmarking é a técnica de usar programas criados com a finalidade de anexar métricas de desempenho quantificáveis a subsistemas de computadores. Usando estes benchmarks desenvolvidos através de uma infinidade de necessidades computacionais, determinamos qual o sistema operativo que seria mais adequado para executar tarefas que necessitem de grande quantidade de processamento.
+
+Este documento está dividido em quatro capítulos.
+Depois desta introdução,
+no \autoref{chap.metodologia} estão representados os Sistemas usados como plataformas de teste, os testes usados e como os usar e também uma breve explicação sobre os sistemas operativos usados e como funcionam,
+no \autoref{chap.resultados} estão representados os resultados obtidos por Sistema e por teste,
+sendo estes discutidos e analisados no \autoref{chap.analise}.
+Finalmente, no \autoref{chap.conclusao} são apresentadas
+as conclusões do trabalho.
+
+\chapter{Metodologia}
+\label{chap.metodologia}
+\section{Condições iniciais}
+Para se poder escrever este relatório foi preciso em primeiro lugar pesquisar como funcionariam os CPUs assim como os sistemas operativos a usar.
+De seguida foram pesquisar-se algoritmos que testassem o desempenho dos  CPUs, foram encontrados varios como Dhrystone, Whetstone, CoreMark... Pela facilidade em obter o "source code" e também pelo facto de testarem diferentes operações escolheu-se para realizar os testes o Dhrystone e o Whetstone.
+Além disso verificou-se as versões dos compiladores usados, para fazer esta verificação usou-se o comando:
+\\
+\\
+\lin{gcc -v}
+\\
+\\
+Vão ser comparadas as performances dos CPUs em dois conhecidos sistemas operativos o Ubunto(um em máquina virtual e outro nativo), e Windows 10 com vista a poder tirar eventuais conclusões.
+\subsection{Especificações dos Sistemas usados}
+\subsubsection{Sistema 1}
+\begin{itemize}
+\item \textbf{Processador} Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz 2.81 GHz
+\item \textbf{RAM} 16 GB
+\item \textbf{Sistemas operativos} Dual boot (Windows 10 e Ubunto 16.04)
+
+
+
+\end{itemize}
+\subsubsection{Sistema 2}
+ \begin{itemize}
+\item \textbf{Processador} Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz 
+\item \textbf{RAM} 16 GB 
+\item \textbf{Sistemas operativos} Dual boot (Windows 10 e Ubuntu 18.04)
+ \end{itemize}
+
+\section{Softwares de benchmarking usados}
+Para se testar as capacidades dos CPUs em causa foram usados os programas Dhrystone e Whetstone que são algoritmos bechmarking .
+Bechmark é o ato de executar um programa, programas ou outras operações, com o objetivo de avaliar o desempenho de um objeto. Normalmente o termo bechmarking é associado à avaliação de performance de um hardware de um computador, mas há circunstâncias que também é associado ao software. 
+
+\subsection{Dhrystone}
+\subsubsection{Explicação}
+O Dhrystone é um software de benchmark desenvolvido por \textit{Reinhold Weicker (1984)} é um programa de teste sintético que avalia o desempenho do processador não tendo conta em operações de vírgula flutuante.  \\
+Cada dhrystone é uma medida de quantas vezes o programa corre em cada segundo.\\
+Weicker com o Dhrystone reuniu dados de outros softwares, incluindo programas escritos em FORTRAN, PL/1,SAL,ALGOL68 e Pascal. A partir destes dados escreveu o benchmark Dhrystone, foi publicado em Ada, mas mais tarde Rick Richardson desenvolveu a versão em C do Unix. \\
+Apesar de ser bastante coerente apresenta algumas deficiências enumeradas seguidamente:\\
+\begin{itemize}
+	\item O seu código é pouco comum e não é representativo de programas na vida real.
+	\item O pequeno tamanho do código não analisa todos os aspetos de um CPU moderno, deste modo o desempenho da busca de instruções não é rigorosamente testado.
+	\item É suscetível a otimizações do compilador, essa otimização exagera o desempenho do sistema em mais de 30\%.
+\end{itemize}
+\subsubsection{Método de utilização (Ubunto)}
+Para usar o Dhrystone no Ubunto basta guardar o "source code" que se encontra disponível em variados sites online estando a versão que utilizámos anexada, na pasta "benchmarkalgoritmos", em seguida correr no terminal os seguintes comandos tendo em conta que estes deverão ser executados dentro do diretório onde o ficheiro guardado se encontra.
+\\
+\\
+\lin{gcc "nome do ficheiro".c}
+\\
+\\
+O comando acima vai compilar o ficheiro c.
+\\
+\\
+\lin{./a.out}
+\\
+\\
+Por sua vez este irá executar o executável.
+\\
+\subsubsection{Método de utilização (Windows)}
+
+Para usar o Dhrystone no Windows começamos por instalar o mingw de seguida guardar o "source code" que se encontra disponível em variados sites online estando a versão que utilizámos, anexada na pasta "benchmarkalgoritmos" e em seguida correr no terminal os seguintes comandos tendo em conta que estes deverão ser executados dentro do diretório onde o ficheiro guardado se encontra.
+\\
+\\
+\lin{gcc "nome do ficheiro".c}
+\\
+\\
+Tal como para o ubunto este comando vai compilar o ficheiro c.
+\\
+\\
+\lin{"nome do ficheiro criado".exe}
+\\
+\\
+Este comando executa o ficheiro.exe criado.
+
+\subsection{Whetstone}
+\subsubsection{Explicação}
+O Whetstone é um software de bechmark para avaliar o desempenho dos computadores, ao contrário do Dhrystone, o Whetstone é capaz de avaliar a capacidade do CPU de fazer operações com números "floating point" .É um programa de teste sintético que avalia o desempenho do processador em aritmética de inteiros. Foi escrito pela primeira vez em \textit{Algol 60} em 1972 na TSU(The Technical Support Unit of the Department of Trade and Telecommunications). 
+\subsubsection{Método de utilização (Ubunto)}
+Para usar o Whetstone no Ubunto basta guardar o "source code" disponivel online em diversos sites estando a versão por nós utilizada, anexada na pasta "benchmarkalgoritmos" e depois correr no terminal os seguintes comandos.Mais uma vez deveremos executar estes comandos dentro dos diretórios onde o ficheiro guardado se encontra.
+\\
+\\
+\lin{gcc "nome do ficheiro".c -lm}
+\\
+\\
+O comando acima vai compilar o ficheiro c.
+\\
+\\
+\lin{./a.out}
+\\
+\\
+Por sua vez este irá executar o executavel.
+\subsubsection{Metodo de utilização (Windows)}
+
+Para usar o Whetstone no Ubunto tem de se guardar o "source code" disponível online em diversos sites estando a versão que nós utilizamos, anexada na pasta "benchmarkalgoritmos" e depois correr no terminal os seguintes comandos, tendo em atenção que deveremos executar estes comandos dentro dos diretórios onde o ficheiro guardado se encontra.
+\\
+\\
+\lin{gcc "nome do ficheiro".c}
+\\
+\\
+Tal como para o ubunto este comando vai compilar o ficheiro c.
+\\
+\\
+\lin{ "nome do ficheiro criado".exe}
+\\
+\\
+Este comando executa o ficheiro.exe criado mas é preciso ter especial atenção pois temos de nos encontrar do diretório onde se encontra o .exe.
+\subsection{Whetstone VS Dhrystone}
+Apesar de muito parecidos o Whetstone e o Dhrystone por serem ambos \textit{benchmarks sintéticos} , que significa que são programas simples e desenvolvidos cuidadosamente para reproduzir estatisticamente o uso do processador, apresentam algumas diferenças que fazem com que o Whetstone sobressaia. A principal é que o benchmark Dhrystone não contém operações de ponto flutuante, ao contrário do Whetstone que já as contém.
+\section{Informação básica sobre um CPU}
+CPU ou Central Processing Unit é um componente do computador que tem como principal tarefa fazer maior parte dos cálculos que ocorrem nos programas.
+
+O CPU começou por ser um conjunto de componentes separados mas nos dias que correm o processador é um único circuito integrado cujo nome é microprocessador.
+
+É tambem relevante saber que o CPU é constituido por alguns componentes dos quais se destacam:
+\begin{itemize}
+\item (ULA) unidade lógica e aritmética.
+\item (UC) unidade de controlo.
+\item memória cache.
+\end{itemize}
+A velocidade de frequência do relógio refere-se ao número de ciclos que o processador passa por segundo.Por Exemplo um CPU de 2.0 ghz faz 2 milhões de ciclos por segundo.
+
+Como é óbvio quantos mais ghz mais rápido será o processador.
+
+A eficiência de cada ciclo é o mesmo que dizer IPC(instructions per second) para um CPU ser rápido é preciso que a eficiência de cada ciclo seja alta.
+
+Como referido em cima um dos componentes do CPU e a memória cache
+a partir desta cache o processador vai buscar informação necessária de maneira muito rápida.
+
+Quando nos referimos a CPUs é inevitável não surgir a palavra core existem processadores dual core, quad core entre outros, quantos mais cores mais facilmente o processador consegue lidar com a data que lhe chega.
+
+\subsection{Windows 10}
+O Windows é um conjunto de programas que juntos fazem o que é mais conhecido por Sistema operatívo.
+Foi criado pela Microsoft em \texttt{Novembro de 1985}.
+\subsection{Ubunto}
+O Ubuntu é um modelo em que o código fonte é livre o que significa que toda a gente o pode usar, é uma distribuição de Linux baseada no kernel do linux.
+\subsection{Como funciona um sistema operatívo}
+Quando ligamos um computador um conjunto de funções começa, a essa operação chamamos "Bootstrap".O "Boostrapping" é o ato de as funções começarem a ser executadas em cadeia.
+Depois de o "Bootstrapping" ser feito o sistema operativo fica responsável por tratar de tudo o que ele e os outros programas precisam do hardware.
+Visto de maneira simplicista quando um utilizador quer fazer uso de um programa e clica por exemplo num atalho o sistema operativo vai dar ordem para fornecer a memória necessária à execução desse programa, uma vez terminado o programa  o sistema operativo vai dar ordem para que a memória que ele estava a alojar seja libertada.
+\subsection{Máquina Virtual}
+A máquina virtual é um software de ambiente computacional em que o Host (sistema onde executa o software de visualização) cria um ou mais ambientes virtuais, que são chamados Guests (ambiente virtual onde se executa o sistema).
+
+O termo máquina virtual foi implementado na década de 1960 e hoje é muito usado no dia a dia deido ás suas vantagens de entre as quais se destacam:
+\begin{itemize}
+\item melhor utilização dos recursos;
+\item possibilidade de rodar todos os sistemas operacionais sem criar partições no HD;
+\item uso para testes sem danificar o Host;
+\item possibilidade de comparar vários sistemas operacionai utilizando o mesmo equipamento;
+\item diminui os custos de hardware;
+\item podem ser facilmente copiadas e deslocadas;
+em geral o uso deste software tem vindo a aumentar, não só pela performance mas pelo custo reduzido de hardware e manuntenção.
+\end{itemize}
+\subsubsection{Exemplos de máquinas virtuais}
+\begin{itemize}
+\item VMware
+\item VirtualBox
+\item Bochs
+\item QEMU
+\item oVirt
+\item Kernel-based Virtual Machine
+\item Virtual PC
+\item Parallels Desktop
+\end{itemize}
+
+
+
+
+\chapter{Resultados}
+\label{chap.resultados}
+\section{Sistema 1} 
+\subsection{Dhrystones}
+
+\subsubsection{Windows}
+Dhrystone(1.1) time for 10000000
+passes = 0.809000
+This machine benchmarks at 8512274 dhrystones/second
+
+\subsubsection{Ubunto(16.04)}
+Dhrystone(1.1) time for 127258497 
+passes = 14.95
+This machine benchmarks at 12360939 dhrystones/second
+\subsubsection{Virtual Machine}
+Dhrystone(1.1) time for 126658898 passes = 14.93
+This machine benchmarks at 8483516 dhrystones/second
+\subsection{Whetstones}
+\subsubsection{Windows}
+Loops 100000,Uterations: 1,Duration: 4.885000 sec.
+C Converted Double Precision Whetstones: 2047.1 MWIPS (Millions of whetsotens per second)
+
+\subsubsection{Ubunto(16.04)}
+Loops 100000 ,Iteractions: 1,Duration:3.078869 sec.
+C Converted Double Precision whetstones:3247.9 MWIPS (Millions of whetsotens per second)
+\subsubsection{Virtual Machine}
+Loops: 100000, Iterations: 1, Duration: 2.484472 sec.
+C Converted Double Precision Whetstones: 4025.0 MWIPS (Millions of whetsotens per second)
+\section{Sistema 2}
+\subsection{Dhrystones}
+\subsubsection{Windows}
+Dhrystone(1.1) time for 207559511 passes = 14.90
+This machine benchmarks at 9328298 dhrystones/second
+\subsubsection{Linux}
+Dhrystone(1.1)time for 187735455
+passes=14.92
+This machine benchmarks at 12582805 dhrystones/second
+\subsubsection{Virtual Machine}
+Dhrystone(1.1) time for 82442141 
+passes = 14.82
+This machine benchmarks at 5562897 dhrystones/second
+\subsection{Whetstones}
+\subsubsection{Windows}
+Loops: 100000, Iterations: 1, Duration: 2.921000 sec.
+C Converted Double Precision Whetstones: 3423.5 MWIPS (Millions of whetsotens per second)
+\subsubsection{Linux}
+Loops: 100000, Iterations: 1, Duration: 2.031211 sec.
+C Converted Double Precision Whetstones: 4923.2 MWIPS (Millions of whetsotens per second)
+\subsubsection{Virtual Machine}
+Loops: 100000, Iterations: 1, Duration: 3.618976 sec.
+C Converted Double Precision Whetstones: 2763.2 MWIPS (Millions of whetsotens per second)
+\chapter{Análise}
+\label{chap.analise}
+Vamos agora neste capítulo proceder á análise dos resultados apresentados no capítulo anterior e discutir o seu conteúdo.
+
+Serão usados quatro gráficos ilustrativos dos resultados obtidos, para se poder fazer uma melhor leitura e interpretação dos dados. Cada Sistema irá ter dois gráficos onde num deles estão representados os Dhrystones por sistema operativo e noutro os Whetstones também representados por sistema operativo.
+
+Os resultados a \textcolor{green}{verde} representam os Dhrystones por segundo e a \textcolor{blue}{azul} os Whetstones por segundo.
+\section{Resultados}
+\subsection{Sistema 1 Dhrystones}
+\begin{tikzpicture}
+\begin{axis}[
+symbolic x coords={Windows, Ubunto, Máquina Virtual(Ubunto)},
+xtick=data
+]
+\addplot[ybar,fill=green] coordinates {
+(Windows,   8512274)
+(Ubunto,  12360939)
+(Máquina Virtual(Ubunto),   8483516)
+};
+\end{axis}
+\end{tikzpicture}
+
+Fig 4.1:Comparação do número de vezes que o Dhrystone corre em 1 segundo do Sistema 1.
+\subsection{Sistema 1 Whetstones}
+\begin{tikzpicture}
+\begin{axis}[
+symbolic x coords={Windows, Ubunto, Máquina Virtual(Ubunto)},
+xtick=data
+]
+\addplot[ybar,fill=blue] coordinates {
+(Windows,   2120900000)
+(Ubunto,  3304100000)
+(Máquina Virtual(Ubunto),   3489500000)
+};
+\end{axis}
+\end{tikzpicture}
+
+Fig 4.2:comparação do número de vezes que o Whetstone corre em 1 segundo do Sistema 1.
+
+\subsection{Sistema 2 Dhrystones}
+\begin{tikzpicture}
+\begin{axis}[
+symbolic x coords={Windows, Ubunto, Máquina Virtual(Ubunto)},
+xtick=data
+]
+\addplot[ybar,fill=green] coordinates {
+(Windows,  9328298)
+(Ubunto,  12582805)
+(Máquina Virtual(Ubunto),   5562897)
+};
+\end{axis}
+\end{tikzpicture}
+
+Fig 4.3:Comparação do número de vezes que o Dhrystone corre em 1 segundo do Sistema 2.
+
+
+\subsection{Sistema 2 Whetstones}
+\begin{tikzpicture}
+\begin{axis}[
+symbolic x coords={Windows, Ubunto, Máquina Virtual(Ubunto)},
+xtick=data
+]
+\addplot[ybar,fill=blue] coordinates {
+(Windows,   3423500000)
+(Ubunto,  4923200000 )
+(Máquina Virtual(Ubunto),   2763200000)
+};
+\end{axis}
+\end{tikzpicture}
+
+Fig 4.4:comparação do numero de vezes que o Whetstone corre em 1 segundo do Sistema 2.
+\subsection{Discusão dos dados obtidos}
+A partir dos dados registados nos gráficos é possivel observar que existe uma parecença nos resultados obtidos em cada um dos Sistemas à excessão dos Whetstones registados na Máquina Virtual(Ubunto(18.04)).
+
+Sendo assim e visto que existem é possivel dar a estes resultados uma certa fiabilidade.
+
+A partir dos resultados vemos que o Ubunto é sem dúvida dos 2 o que tem uma maior velocidade geral de CPU o que nos leva assim a recomendar o Ubunto para quem tenha computadores mais lentos ou até mesmo mais desatualizados, com vista a obter uma melhor performance no seu dispositivo.
+\chapter{Conclusões}
+\label{chap.conclusao}
+Durante este relatório a partir dos testes feitos é possível concluir que não só os CPUs mais atuais têm uma melhor performance mas também podemos observar que o Windows é o que tira pior proveito do CPU.
+
+Deparamo-nos também com uma supresa, o facto de uma máquina virtual com o Sistema operativo Ubunto conseguir ter uma melhor performance no que toca a operações com números do tipo "float"em relação ao Ubunto nativo isto poderá ser devido ao facto da versão do Ubunto do sistema 1 ser inferior ao da máquina virtual.
+
+É obvio que os CPUs não são tudo para um computador, existem obviamente componentes tão importantes como o CPU que afetam a performance do computador nas mais variadas tarefas.
+
+Assim sendo para quem queira um melhor poder de processamento no seu computador poderá assim fazer com estes testes uma escolha mais adequada.
+ 
+
+
+\chapter*{Contribuições dos autores}
+Neste Capítulo acerca da contribuição que cada autor teve, Guilherme Pereira, irá ser mencionado como GP e Miguel Cabral por MC.
+
+Tanto GP como MC realizaram os testes aos Sistemas usados assim como ambos contribuíram de forma idêntica para a realização da escrita dos diversos capítulos aqui presentes neste documento.
+
+Por estes motivos a contribuição de cada autor pode ver-se como 50\% 50\%. 
+\chapter*{Bibliografia}
+\begin{itemize}
+\item \href{https://help.ubuntu.com/lts/installation-guide/s390x/ch01s01.html}{O que é o Ubunto}
+\item \href{https://www.howtogeek.com/132624/htg-explains-whats-a-linux-distro-and-how-are-they-different/}{Distribuições linux}
+\item \href{https://searchenterprisedesktop.techtarget.com/definition/Windows-10}{O que é o windows 10}
+\item \href{https://www.howtogeek.com/361572/what-is-an-operating-system/}{O que é e como funciona um sistema operativo}
+\item \href{https://en.wikipedia.org/wiki/Dhrystone}{O que é o Dhrystone}
+\item \href{https://en.wikipedia.org/wiki/Whetstone}{O que é o Whetstone}
+\item \href{https://www.experts-exchange.com/questions/20080806/Dhrystone-Whetstone.html}{Diferenças entre os algoritmos Dhrystone e Whetstone}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Acrónimos}
+\begin{acronym}
+\acro{ua}[UA]{Universidade de Aveiro}
+\acro{miect}[MIECT]{Mestrado Integrado em Engenharia de Computadores e Telemática}
+\acro{lei}[LEI]{Licenciatura em Engenharia Informática}
+\acro{glisc}[GLISC]{Grey Literature International Steering Committee}
+\acro{tsu}[TSU]{Unidade de suporte técnico do Departamento de Comércio e Indústria, mais tarde parte da Agência Central de Computação e Telecomunicações ou CCTA no Reino Unido}
+\acro{npl}[NPL]{(National Physical Laboratory}
+\end{acronym}
+\begin{itemize}
+
+\item CPU = Central Processing Unit = Unidade Central de Processamento.
+\item TSU = The Technical Support Unit of the Department of Trade and Telecomunications.
+\item IPC = Instructions Per Second = Instruções Por Segundo.
+\item MWIPS = Millions Of Whetstones Per Second = Milhões De Instruções Por Segundo.
+
+
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

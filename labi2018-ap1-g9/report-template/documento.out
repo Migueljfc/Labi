@@ -1,0 +1,28 @@
+\BOOKMARK [0][-]{chapter.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Metodologia}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Condi\347\365es iniciais}{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.1.1}{Especifica\347\365es dos Sistemas usados}{section.2.1}% 4
+\BOOKMARK [1][-]{section.2.2}{Softwares de benchmarking usados}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{Dhrystone}{section.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.2.2}{Whetstone}{section.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.3}{Whetstone VS Dhrystone}{section.2.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Informa\347\343o b\341sica sobre um CPU}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.3.1}{Windows 10}{section.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.3.2}{Ubunto}{section.2.3}% 11
+\BOOKMARK [2][-]{subsection.2.3.3}{Como funciona um sistema operat\355vo}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.4}{M\341quina Virtual}{section.2.3}% 13
+\BOOKMARK [0][-]{chapter.3}{Resultados}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Sistema 1}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.1.1}{Dhrystones}{section.3.1}% 16
+\BOOKMARK [2][-]{subsection.3.1.2}{Whetstones}{section.3.1}% 17
+\BOOKMARK [1][-]{section.3.2}{Sistema 2}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.2.1}{Dhrystones}{section.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2.2}{Whetstones}{section.3.2}% 20
+\BOOKMARK [0][-]{chapter.4}{An\341lise}{}% 21
+\BOOKMARK [1][-]{section.4.1}{Resultados}{chapter.4}% 22
+\BOOKMARK [2][-]{subsection.4.1.1}{Sistema 1 Dhrystones}{section.4.1}% 23
+\BOOKMARK [2][-]{subsection.4.1.2}{Sistema 1 Whetstones}{section.4.1}% 24
+\BOOKMARK [2][-]{subsection.4.1.3}{Sistema 2 Dhrystones}{section.4.1}% 25
+\BOOKMARK [2][-]{subsection.4.1.4}{Sistema 2 Whetstones}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.5}{Discus\343o dos dados obtidos}{section.4.1}% 27
+\BOOKMARK [0][-]{chapter.5}{Conclus\365es}{}% 28

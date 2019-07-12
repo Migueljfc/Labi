@@ -1,0 +1,9 @@
+[0] Config.pm:302> INFO - This is Biber 2.9
+[2] Config.pm:305> INFO - Logfile is 'documento.blg'
+[55] biber:313> INFO - === qui nov 22, 2018, 16:41:47
+[122] Biber.pm:371> INFO - Reading 'documento.bcf'
+[210] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[219] Utils.pm:169> WARN - The file 'documento.bcf' does not contain any citations!
+[230] bbl.pm:617> INFO - Writing 'documento.bbl' with encoding 'UTF-8'
+[230] bbl.pm:720> INFO - Output to documento.bbl
+[230] Biber.pm:110> INFO - WARNINGS: 1

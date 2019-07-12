@@ -1,0 +1,32 @@
+#ola{
+background-image: url('kek.jpg');
+background-size: cover;
+background-position: center center
+position: relative;
+top: 0;
+bottom: 0;
+height: 50vh;
+z-index: -10;
+
+}
+#adeus{
+background-image: url('adeus.jpg');
+background-size: cover;
+background-position: center center
+position: relative;
+top: 0;
+bottom: 0;
+height: 50vh;
+z-index: -10;
+
+}
+#use{
+background-image: url('cp.jpg');
+background-size: cover;
+background-position: center center
+position: relative;
+top: 0;
+bottom: 0;
+height: 50vh;
+z-index: -10;
+}

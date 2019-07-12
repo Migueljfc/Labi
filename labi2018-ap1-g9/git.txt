@@ -1,0 +1,13 @@
+git config --global user.email "user.mail@ua.pt"
+git config --global user.name "user name"
+
+
+git add -A # adiciona todos os ficheiros que estão na pasta local do repositorio ao index
+OU
+git add . # adiciona a pasta atual ao index
+OU
+git add file-que-alteraram # adiciona apenas o ficheiro ao index
+E depois:
+git commit -m "Mensagem que fica no commit"
+git push origin master
+Depois de fazerem push, os vossos colegas têm de fazer git pull origin master para ir buscar as alterações ao repositório
